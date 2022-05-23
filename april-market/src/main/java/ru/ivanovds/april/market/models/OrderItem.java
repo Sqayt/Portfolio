@@ -1,11 +1,13 @@
 package ru.ivanovds.april.market.models;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -24,6 +26,7 @@ public class OrderItem {
     private Product product;
 
     @Column(name = "quantity")
+    @NotNull
     private int quantity;
 
     @Column(name = "price_per_product")

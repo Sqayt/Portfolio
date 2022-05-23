@@ -1,6 +1,7 @@
 package ru.ivanovds.april.market.utils;
 
 import lombok.Data;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -45,10 +46,12 @@ public class Cart {
 
     public void delToCart(Long id) {
         for (OrderItem orderItem : items)
-            if (orderItem.getProduct().getId().equals(id)){
-                orderItem.decrementQuantity();
-                recalculate();
-                return;
+            if (orderItem.getProduct().getId().equals(id)) {
+                if (orderItem.getQuantity() > 0) {
+                    orderItem.decrementQuantity();
+                    recalculate();
+                    return;
+                }
             }
 
         Product product = productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product doesn't exists id: " + id + " (del to cart)"));

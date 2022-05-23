@@ -46,7 +46,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
 
     $scope.loadCart = function (page) {
         $http({
-            url: contextPath + 'api/v1/cart',
+            url: contextPath + '/api/v1/cart',
             method: 'GET'
         }).then(function (response) {
             $scope.cartDto = response.data;
@@ -68,7 +68,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             method: 'DELETE'
         }).then(function (response) {
             $scope.loadCart();
-        });
+            });
     }
 
     $scope.generatePagesIndexes = function (startPage, endPage) {
